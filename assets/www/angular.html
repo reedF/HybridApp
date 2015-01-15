@@ -1,9 +1,66 @@
 <!doctype html>
-<html ng-app>
+<html lang="en" ng-app="App">
     <head>
-        <script src="js/angular.min.js"></script>
+        <meta charset="utf-8">
+        <title>APP</title>
+        <script src="bower_components/jquery/dist/jquery.js">
+        </script>
+        <script src="bower_components/angular/angular.js">
+        </script>
+        <script src="bower_components/angular-animate/angular-animate.js">
+        </script>
+        <script src="bower_components/angular-route/angular-route.js">
+        </script>
+        <script src="bower_components/angular-resource/angular-resource.js">
+        </script>
+        <script>
+            /* Controllers */
+            var appControllers = angular.module('appControllers', []);
+            //appControllers.controller('CityListCtrl', ['$scope', '$http', '$cookies', function($scope, $http, $cookies){
+            appControllers.controller('CityListCtrl', ['$scope', '$http', function($scope, $http){
+                //console.log($cookies['t']);
+                //$scope.cook = $cookies['t'];
+                //$http.defaults.headers.common.Authorization = $cookies['t'];
+                //$scope.getCities = function(){
+                $http.post("http://10.10.1.16:8080/t-api/city/p").success(function(data, status, headers, config){
+                    $scope.result = data;
+                }).error(function(data, status, headers, config){
+                    $scope.result = "error";
+                })
+                //}
+            }
+            ]);
+            
+            appControllers.controller('test', ['$scope', '$http', function($scope, $http){
+                console.log('1');
+                $http.defaults.headers.common.Authorization = '738jbrxmtiiNSHe6DgvuevmUJBPNAcVsU5eIeH5EbY0=';
+                $http({
+                    url: 'http://10.10.1.16:8080/t-api/city/p',
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data: {
+                        'id': 35
+                    }
+                }).success(function(data, status, headers, config){
+                    $scope.result = data;
+                    console.log(data);
+                }).error(function(data, status, headers, config){
+                    $scope.result = "error";
+                    console.log(data);
+                });
+            }
+            ]);
+            /* App Module */
+            var App = angular.module('App', ['appControllers']);
+        </script>
     </head>
     <body>
-        Hello {{'World'}}!
+
+        <div ng-app="App" ng-controller="test">
+            Result:<br>
+			{{result}}
+        </div>    
     </body>
 </html>

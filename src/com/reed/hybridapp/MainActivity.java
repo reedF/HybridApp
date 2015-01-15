@@ -25,7 +25,9 @@ public class MainActivity extends DroidGap {
 		// }
 		//super.loadUrl("file:///android_asset/www/index.html");
 		//super.loadUrl("file:///android_asset/www/jqm.html");
-		super.loadUrl("file:///android_asset/www/angular.html");
+		//super.loadUrl("file:///android_asset/www/angular.html");
+		//super.loadUrl("http://amazeui.org/widgets/m");
+		super.loadUrl("http://10.10.1.16:8080/app/app.html");
 	}
 
 	@Override
